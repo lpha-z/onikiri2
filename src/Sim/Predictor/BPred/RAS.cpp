@@ -86,7 +86,7 @@ void RAS::Initialize(InitPhase phase)
     
 }
 
-// call命令のPCをPushする
+// Push the return address (NOT the address of call instruction)
 void RAS::Push(const SimPC& pc)
 {
     if (m_enableBackup)
@@ -96,16 +96,16 @@ void RAS::Push(const SimPC& pc)
         m_stack[setRasStackPos] = (*m_backupStack)[*m_backupStackTop];
 
         // Push a new PC.
-        (*m_backupStack)[*m_backupStackTop] = pc.Next();
+        (*m_backupStack)[*m_backupStackTop] = pc;
         *m_backupStackTop = PointStackPos(*m_backupStackTop, MAX_BACKUP_SIZE, 1);
     }
 
     // Push a new PC.
-    m_stack[*m_stackTop] = pc.Next();
+    m_stack[*m_stackTop] = pc;
     *m_stackTop = PointStackPos(*m_stackTop, GetStackSize(), 1);
 }
 
-// return命令なのでPCをPOPする
+// Pop the return address
 SimPC RAS::Pop()
 {
     // Pop the latest PC.

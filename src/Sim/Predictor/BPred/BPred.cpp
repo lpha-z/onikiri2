@@ -170,8 +170,7 @@ PC BPred::Predict( OpIterator op, PC predIndexPC )
 
     case BT_CALL:
         // call なら RAS に push して、BTB の予測を返す
-        // (インクリメントはPush内で行われる
-        m_ras[op->GetLocalTID()]->Push(pc);
+        m_ras[op->GetLocalTID()]->Push(pc.Next());
         return branchTarget;
 
     case BT_RETURN:

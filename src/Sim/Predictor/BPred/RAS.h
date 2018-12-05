@@ -29,8 +29,8 @@
 // 
 
 
-#ifndef __RAS_H__
-#define __RAS_H__
+#ifndef SIM_PREDICTOR_BPRED_RAS_H
+#define SIM_PREDICTOR_BPRED_RAS_H
 
 #include "Interface/Addr.h"
 #include "Interface/OpStateIF.h"
@@ -74,10 +74,10 @@ namespace Onikiri
 
         void Initialize(InitPhase phase);
 
-        // call 命令のPCをpush
+        // Push the return address (NOT the address of call instruction)
         void Push(const SimPC& pc);
         
-        // return 命令なのでPCをPop
+        // Pop the return address
         SimPC Pop();
 
         // accessors
@@ -89,5 +89,5 @@ namespace Onikiri
 
 }; // namespace Onikiri
 
-#endif // __RAS_H__
+#endif // SIM_PREDICTOR_BPRED_RAS_H
 
