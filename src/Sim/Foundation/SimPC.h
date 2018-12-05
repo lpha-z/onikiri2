@@ -36,24 +36,15 @@
 #include "Interface/Addr.h"
 #include "Sim/ISAInfo.h"
 
-#ifndef __SIM_PC_H
-#define __SIM_PC_H
+#ifndef SIM_PC_H
+#define SIM_PC_H
 
 
 namespace Onikiri
 {
-    inline static PC NextPC( PC pc ) 
-    {
-        pc.address += SimISAInfo::INSTRUCTION_WORD_BYTE_SIZE;
-        return pc;
-    }
-
     class SimPC : public PC
     {
     public:
-        static const u64 WORD_SIZE = SimISAInfo::INSTRUCTION_WORD_BYTE_SIZE;
-
-
         SimPC()
         {
         }
@@ -69,18 +60,6 @@ namespace Onikiri
         }
 
         // --- operator
-        SimPC& operator++() 
-        {
-            address += WORD_SIZE;
-            return *this;
-        }
-
-        SimPC operator++(int)  
-        {
-            SimPC pc = *this;
-            address += WORD_SIZE;
-            return pc;
-        }
 
         void operator =(const PC& pc)
         {
@@ -98,23 +77,8 @@ namespace Onikiri
         {
             return pc.operator !=(*this);
         }
-
-        // --- Utility method
-        SimPC Next() const
-        {
-            SimPC pc = *this;
-            pc.address += WORD_SIZE;
-            return pc;
-        }
-
-        SimPC Previous() const
-        {
-            SimPC pc = *this;
-            pc.address -= WORD_SIZE;
-            return pc;
-        }
     };
 
 }   // namespace Onikiri
 
-#endif
+#endif // SIM_PC_H

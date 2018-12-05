@@ -146,6 +146,17 @@ void Op::Initialize(const OpInitArgs& args)
 
 }
 
+PC Op::GetPC() const
+{
+    return m_pc;
+}
+
+PC Op::GetNotTakenPC() const
+{
+    PC pc(m_pc);
+    pc.address += m_opInfo->GetInstructionSizeInByte();
+    return pc;
+}
 
 PhyReg* Op::GetPhyReg(int phyRegNo)
 {
@@ -197,15 +208,9 @@ PC Op::GetTakenPC() const
     return m_takenPC;
 }
 
-PC Op::GetNextPC()
+PC Op::GetNextPC() const
 {
-    if( m_taken ) {  
-        return m_takenPC;
-    }else {
-        SimPC nextPC(m_pc);
-        nextPC++;
-        return nextPC;
-    }
+    return GetTaken() ? GetTakenPC() : GetNotTakenPC();
 }
 
 

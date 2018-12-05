@@ -48,6 +48,7 @@ namespace Onikiri
 
         // PC
         virtual PC GetPC() const = 0;
+        virtual PC GetNotTakenPC() const = 0;
 
         // エミュレータがソースレジスタの値を知るための関数 
         virtual const u64 GetSrc(const int index) const = 0;
@@ -60,6 +61,8 @@ namespace Onikiri
         virtual void SetTakenPC(const PC takenPC) = 0;
         virtual PC GetTakenPC() const = 0;
 
+        virtual PC GetNextPC() const = 0;
+
         // エミュレータがtaken/not takenを教える 
         virtual void SetTaken(const bool taken) = 0;
         virtual bool GetTaken() const = 0;
@@ -70,5 +73,5 @@ namespace Onikiri
 }; // namespace Onikiri
 
 
-#endif // __OPSTATEIF_H__
+#endif // INTERFACE_OP_STATE_IF_H
 

@@ -221,6 +221,7 @@ namespace Onikiri {
             opInfo.SetMicroOpNum( microNum );
             opInfo.SetMicroOpIndex( microOpIndex );
             opInfo.SetMnemonic(mnemonic);
+            opInfo.SetInstructionSizeInByte(4);
 
             // 未定義命令の場合，命令語を即値として入れる
             if (opInfoDef.Iclass == OpClassCode::UNDEF) {
@@ -303,7 +304,7 @@ namespace Onikiri {
                     }
                     break;
                 default:
-                    ASSERT(0, "Alpha64Converter Logic Error : invalid SrcType");
+                    ASSERT(0, "CommonConverter Logic Error : invalid SrcType");
                 }
 
                 srcOpNum ++;
