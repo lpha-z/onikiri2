@@ -53,6 +53,7 @@ namespace Onikiri
         public:
             static const int MaxSrcRegCount = TISAInfo::MaxSrcRegCount;
             static const int MaxDstRegCount = TISAInfo::MaxDstRegCount;
+            static const int RegisterCount = TISAInfo::RegisterCount;
             static const int MaxImmCount = TISAInfo::MaxImmCount;
             static const int MaxSrcCount = MaxSrcRegCount + MaxImmCount;
             static const int MaxDstCount = MaxDstRegCount;
@@ -87,6 +88,7 @@ namespace Onikiri
             void SetSrcReg(int index, int value) 
             {
                 assert( index < MaxSrcRegCount );   // For avoiding gcc's warning.
+                ASSERT( 0 <= value && value < RegisterCount, "The decoded register number is out of range. Check the definition of ISAInfo::RegisterCount." );
                 m_srcReg[index] = value; 
             }
 
@@ -94,6 +96,7 @@ namespace Onikiri
             void SetDstReg(int index, int value) 
             {
                 assert( index < MaxDstRegCount );   // For avoiding gcc's warning.
+                ASSERT( 0 <= value && value < RegisterCount, "The decoded register number is out of range. Check the definition of ISAInfo::RegisterCount." );
                 m_dstReg[index] = value; 
             }
 
